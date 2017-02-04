@@ -2,8 +2,8 @@
 ###简介###
 使用SWIG进行代码的转换，生成PHP扩展。
 ###环境检查###
-apt install  php-devel swig  gcc 
-需要本地安装tensorflow的话，请参考  https://bazel.build/versions/master/docs/install.html 安装bazel
+> apt install  php-devel swig  gcc 
+* 如需要本地安装tensorflow，请参考  https://bazel.build/versions/master/docs/install.html 安装bazel
 ###安装步骤###
 * 1、编译tensorflow,只安装tensorflow的python版本还不可以用，需要手动编译成C版本的库，或从本项目中libtensorflow.tar.gz中提取。
 * 1.1 需要自己编译的可以参考https://www.tensorflow.org/get_started/os_setup#installing_from_sources 。
@@ -32,3 +32,5 @@ apt install  php-devel swig  gcc
 * Q: test_tensorflow.php 报错
 * A: 把libtensorflow.so 放到系统的lib目录，或是指定LD_LIBRARY_PATH确保libtensorflow.so可以被系统找到
 
+* Q: 如何获得支持
+* A: QQ群 324687279 
