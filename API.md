@@ -59,7 +59,7 @@
         int index;  oper中的索引？
 
         
-* 枚举 属性类型
+* 枚举 属性类型  TF_AttrType
  
         TF_ATTR_STRING = 0,    字符串
         TF_ATTR_INT = 1,       数值
@@ -70,3 +70,13 @@
         TF_ATTR_TENSOR = 6,       张量
         TF_ATTR_PLACEHOLDER = 7,  占位符
         TF_ATTR_FUNC = 8,         功能
+
+* 结构 属性描述结构 TF_AttrMetadata
+
+        unsigned char is_list;    逻辑值1是列表，其他表示不是列表
+        int64_t list_size;        列表的长度
+        TF_AttrType type;         类型描述 
+        int64_t total_size;       总的大小， type==STRING && ! list =>字符串长度
+                                  type=STRING&& is list => sum(len(string))
+                                  type=shape&& ! list  => 表示维数
+                                  type=shape&& is list => 所有外观的维数和
