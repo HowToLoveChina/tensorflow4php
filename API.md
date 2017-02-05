@@ -23,6 +23,7 @@
         TF_HALF      不明
         TF_RESOURCE  不明，资源
 * 出错类型枚举  TF_Code
+
         TF_OK  成功
         TF_CANCELLED 取消
         TF_UNKNOWN 未知
