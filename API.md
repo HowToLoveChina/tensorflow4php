@@ -1,6 +1,6 @@
 ### TensorFlow's C-API ###
 
-* 枚举 TF_DataType 
+* 数据类型枚举 TF_DataType 
 
         TF_FLOAT 浮点
         TF_DOUBLE 双精度
@@ -22,3 +22,23 @@
         TF_COMPLEX128  双精度复数
         TF_HALF      不明
         TF_RESOURCE  不明，资源
+* 出错类型枚举  TF_Code
+        TF_OK  成功
+        TF_CANCELLED 取消
+        TF_UNKNOWN 未知
+        TF_INVALID_ARGUMENT 参数无效
+        TF_DEADLINE_EXCEEDED 到达下线？
+        TF_NOT_FOUND 没找到
+        TF_ALREADY_EXISTS 已有
+        TF_PERMISSION_DENIED 没权限
+        TF_UNAUTHENTICATED  没授权
+        TF_RESOURCE_EXHAUSTED 没资源
+        TF_FAILED_PRECONDITION  条件不具备
+        TF_ABORTED  中止
+        TF_OUT_OF_RANGE 超范围
+        TF_UNIMPLEMENTED 没实现
+        TF_INTERNAL 内部错误
+        TF_UNAVAILABLE 不可用
+        TF_DATA_LOSS  这个我不认识
+        
+        
