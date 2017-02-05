@@ -42,4 +42,31 @@
         TF_UNAVAILABLE 不可用
         TF_DATA_LOSS  这个我不认识
         
+* 结构 TF_Buffer 
+
+        const void * data   这是数据指针？
+        size_t length       数据长度
+        void (*data_deallocator)(void* data, size_t length);  用来回收这些内存的函数指针
         
+* 结构 TF_Input 
+
+        TF_Operation* oper;   操作指针
+        int index;  oper中的索引？
+
+* 结构 TF_Output
+
+        TF_Operation* oper;   操作指针
+        int index;  oper中的索引？
+
+        
+* 枚举 属性类型
+ 
+        TF_ATTR_STRING = 0,    字符串
+        TF_ATTR_INT = 1,       数值
+        TF_ATTR_FLOAT = 2,     浮点
+        TF_ATTR_BOOL = 3,      逻辑
+        TF_ATTR_TYPE = 4,      类型 
+        TF_ATTR_SHAPE = 5,     外观？
+        TF_ATTR_TENSOR = 6,       张量
+        TF_ATTR_PLACEHOLDER = 7,  占位符
+        TF_ATTR_FUNC = 8,         功能
