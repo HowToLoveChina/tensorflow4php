@@ -6,29 +6,68 @@
 %}
 
 
+
+
+
+
 %inline %{
 
+
+
+
+// [已测试] 生成新的状态对象
 TF_Status* TF_NewStatus();
+// [已测试] 移除对象
 void TF_DeleteStatus(TF_Status*);
-void TF_SetStatus(TF_Status* s, TF_Code code, const char* msg);
-TF_Code TF_GetCode(const TF_Status* s);
+// [已测试] code 原来的类型是TF_Code ，但是在PHP中使用枚举类型困难，所以改成 int 
+void TF_SetStatus(TF_Status* s, int code , const char* msg);
+// [已测试] 返回值原为TF_Code，所以改成int
+int TF_GetCode(const TF_Status* s);
+// [已测试] 返回对象中存储的消息 
 const char* TF_Message(const TF_Status* s);
-TF_Buffer* TF_NewBufferFromString(const void* proto, size_t proto_len);
+
+
+
+// [已测试] 原为const void * 兼容为 char * 
+//TF_Buffer* TF_NewBufferFromString(const void* proto, size_t proto_len);
+TF_Buffer* TF_NewBufferFromString( char * proto, size_t proto_len);
+// [已测试]
 TF_Buffer* TF_NewBuffer();
+// [已测试]
 void TF_DeleteBuffer(TF_Buffer*);
+// [已测试]
 TF_Buffer TF_GetBuffer(TF_Buffer* buffer);
-TF_Tensor* TF_NewTensor(TF_DataType, const int64_t* dims, int num_dims,
-                               void* data, size_t len,
+// [已测试] PHP不能操作C成员，只能增加这个接口来实现
+char * TF_GetBufferData( TF_Buffer* buffer){
+	return (char*)buffer->data;
+}
+// [已测试] PHP不能操作C成员，只能增加这个接口来实现
+int   TF_GetBufferLength( TF_Buffer* buffer){
+    return (int)buffer->length;
+}
+
+
+
+
+
+//这个在PHP中不使用，回调函数不知道如何实现
+/*
+TF_Tensor* TF_NewTensor(TF_DataType, const int64_t* dims, int num_dims,void* data, size_t len,
                                void (*deallocator)(void* data, size_t len,
                                                    void* arg),
                                void* deallocator_arg);
+*/
 
-extern TF_Tensor* TF_AllocateTensor(TF_DataType, const int64_t* dims,
-                                    int num_dims, size_t len);
+//extern TF_Tensor* TF_AllocateTensor(TF_DataType, const int64_t* dims,int num_dims, size_t len);
+extern TF_Tensor* TF_AllocateTensor(int type , int64 * dims,int num_dims, size_t len);
 extern void TF_DeleteTensor(TF_Tensor*);
-extern TF_DataType TF_TensorType(const TF_Tensor*);
-extern int TF_NumDims(const TF_Tensor*);
-extern int64_t TF_Dim(const TF_Tensor* tensor, int dim_index);
+
+//类型不支持所以转成INT
+//extern TF_DataType TF_TensorType(const TF_Tensor*);
+extern int TF_TensorType(const TF_Tensor*);
+extern int64 TF_NumDims(const TF_Tensor*);
+//extern int64_t TF_Dim(const TF_Tensor* tensor, int dim_index);
+in64_t TF_Dim(const TF_Tensor* tensor, int dim_index);
 extern size_t TF_TensorByteSize(const TF_Tensor*);
 extern void* TF_TensorData(const TF_Tensor*);
 extern size_t TF_StringEncode(const char* src, size_t src_len, char* dst,
@@ -354,6 +393,5 @@ extern TF_Buffer* TF_GetAllOpList();
 #define  PHP_TF_INTERNAL  13
 #define  PHP_TF_UNAVAILABLE  14
 #define  PHP_TF_DATA_LOSS  15
-
 
 
